@@ -18,7 +18,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         // Insert code here to initialize your application
         mainWindowController.showWindow(nil)
-        mainWindowController.window.makeKeyAndOrderFront(nil)
+        //mainWindowController.window.makeKeyAndOrderFront(nil) 10.10 Base SDK version
+        mainWindowController.window().makeKeyAndOrderFront(nil)
     }
 
     func applicationWillTerminate(aNotification: NSNotification?) {

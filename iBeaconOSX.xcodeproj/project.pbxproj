@@ -14,6 +14,7 @@
 		896291DE194D2A6800C6547F /* iBeaconOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896291DD194D2A6800C6547F /* iBeaconOSXTests.swift */; };
 		896291EB194D2AC200C6547F /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896291E9194D2AC200C6547F /* MainWindowController.swift */; };
 		896291EC194D2AC200C6547F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 896291EA194D2AC200C6547F /* MainWindow.xib */; };
+		89E30D08194D7D7900EA2AB0 /* BeaconRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E30D07194D7D7900EA2AB0 /* BeaconRegion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		896291DD194D2A6800C6547F /* iBeaconOSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iBeaconOSXTests.swift; sourceTree = "<group>"; };
 		896291E9194D2AC200C6547F /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		896291EA194D2AC200C6547F /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		89E30D07194D7D7900EA2AB0 /* BeaconRegion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconRegion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +82,10 @@
 			isa = PBXGroup;
 			children = (
 				896291CC194D2A6800C6547F /* AppDelegate.swift */,
+				896291E9194D2AC200C6547F /* MainWindowController.swift */,
+				89E30D07194D7D7900EA2AB0 /* BeaconRegion.swift */,
 				896291CE194D2A6800C6547F /* Images.xcassets */,
 				896291C8194D2A6800C6547F /* Supporting Files */,
-				896291E9194D2AC200C6547F /* MainWindowController.swift */,
 				896291D0194D2A6800C6547F /* MainMenu.xib */,
 				896291EA194D2AC200C6547F /* MainWindow.xib */,
 			);
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				896291CD194D2A6800C6547F /* AppDelegate.swift in Sources */,
+				89E30D08194D7D7900EA2AB0 /* BeaconRegion.swift in Sources */,
 				896291CB194D2A6800C6547F /* main.swift in Sources */,
 				896291EB194D2AC200C6547F /* MainWindowController.swift in Sources */,
 			);
@@ -335,7 +339,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = iBeaconOSX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
 			};
 			name = Debug;
 		};
@@ -346,7 +353,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = iBeaconOSX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
 			};
 			name = Release;
 		};
