@@ -11,51 +11,43 @@ import IOBluetooth
 
 class MainWindowController: NSWindowController, CBPeripheralManagerDelegate {
 
-    @IBOutlet var uuidTextField : NSTextField
-    @IBOutlet var majorTextField : NSTextField
-    @IBOutlet var minorTextField : NSTextField
-    @IBOutlet var powerTextField : NSTextField
-    @IBOutlet var btInfoLabel : NSTextField
-    @IBOutlet var triggerButton : NSButton
+    @IBOutlet var uuidTextField : NSTextField?
+    @IBOutlet var majorTextField : NSTextField?
+    @IBOutlet var minorTextField : NSTextField?
+    @IBOutlet var powerTextField : NSTextField?
+    @IBOutlet var btInfoLabel : NSTextField?
+    @IBOutlet var triggerButton : NSButton?
 
-    @lazy var btManager: CBPeripheralManager = {
+    lazy var btManager: CBPeripheralManager = {
         var manager = CBPeripheralManager(delegate: self, queue: nil)
         return manager
     }()
 
     override func windowDidLoad() {
         super.windowDidLoad()
-
-        /** With SDK Based on 10.10 this is how it should be done.
-        triggerButton.target = self
-        triggerButton.action = "didPressTriggerButton:"
-        **/
-
-        triggerButton.setTarget(self);
-        triggerButton.setAction("didPressTriggerButton:")
-
+        triggerButton?.target = self;
+        triggerButton?.action = "didPressTriggerButton:"
         btManager.delegate = self
     }
 
     func didPressTriggerButton(sender: AnyObject?) {
         if (btManager.isAdvertising) {
             btManager.stopAdvertising()
-            triggerButton.setTitle("Turn iBeacon On")
-            uuidTextField.setEnabled(true)
-            minorTextField.setEnabled(true)
-            majorTextField.setEnabled(true)
-            powerTextField.setEnabled(true)
+            triggerButton?.title = "Turn iBeacon On"
+            uuidTextField?.enabled = true
+            minorTextField?.enabled = true
+            majorTextField?.enabled = true
+            powerTextField?.enabled = true
         } else {
-
-            let proximityUUID = NSUUID(UUIDString: uuidTextField.stringValue())
-            let beaconRegion = BeaconRegion(uuid: proximityUUID, major: UInt16(majorTextField.intValue()), minor: UInt16(minorTextField.intValue()))
-            var advertismentDictionary = beaconRegion.peripheralDataWithMeasuredPower(Int8(self.powerTextField.intValue()))
+            let proximityUUID = NSUUID(UUIDString: uuidTextField!.stringValue)
+            let beaconRegion = BeaconRegion(uuid: proximityUUID!, major: UInt16(majorTextField!.intValue), minor: UInt16(minorTextField!.intValue))
+            var advertismentDictionary = beaconRegion.peripheralDataWithMeasuredPower(Int8(self.powerTextField!.intValue))
             btManager.startAdvertising(advertismentDictionary)
-            triggerButton.setTitle("Turn iBeacon Off")
-            uuidTextField.setEnabled(false)
-            minorTextField.setEnabled(false)
-            majorTextField.setEnabled(false)
-            powerTextField.setEnabled(false)
+            triggerButton?.title = "Turn iBeacon Off"
+            uuidTextField?.enabled = false
+            minorTextField?.enabled = false
+            majorTextField?.enabled = false
+            powerTextField?.enabled = false
         }
     }
 
@@ -65,23 +57,23 @@ class MainWindowController: NSWindowController, CBPeripheralManagerDelegate {
     func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager!) {
         switch (peripheral.state) {
         case .Unknown:
-            btInfoLabel.setStringValue("State Unknown")
-            triggerButton.setEnabled(false)
+            btInfoLabel?.stringValue = "State Unknown"
+            triggerButton?.enabled = false
         case .Unauthorized:
-            btInfoLabel.setStringValue("Unauthorized")
-            triggerButton.setEnabled(false)
+            btInfoLabel?.stringValue = "Unauthorized"
+            triggerButton?.enabled = false
         case .Resetting:
-            btInfoLabel.setStringValue("Resetting")
-            triggerButton.setEnabled(false)
+            btInfoLabel?.stringValue = "Resetting"
+            triggerButton?.enabled = false
         case .PoweredOff:
-            btInfoLabel.setStringValue("Bluetooth Off")
-            triggerButton.setEnabled(false)
+            btInfoLabel?.stringValue = "BT Off"
+            triggerButton?.enabled = false
         case .Unsupported:
-            btInfoLabel.setStringValue("BLTE not available on your Mac")
-            triggerButton.setEnabled(false)
+            btInfoLabel?.stringValue = "BLTE not supported on your Mac"
+            triggerButton?.enabled = false
         case .PoweredOn:
-            btInfoLabel.setStringValue("System Ready to use")
-            triggerButton.setEnabled(true)
+            btInfoLabel?.stringValue = "All Set, System ready to use"
+            triggerButton?.enabled = true
         }
     }
 }

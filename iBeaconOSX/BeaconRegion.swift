@@ -24,19 +24,19 @@ class BeaconRegion {
     func peripheralDataWithMeasuredPower(power:Int8?) -> NSDictionary {
         if let p = power  {
             if p < 0 {
-                self.measuredPower = p
+                measuredPower = p
             }
         }
 
-        var advertisementBytes = CUnsignedChar[](count: 21, repeatedValue: 0)
+        var advertisementBytes = [CUnsignedChar](count: 21, repeatedValue: 0)
         uuid.getUUIDBytes(&advertisementBytes)
-        advertisementBytes[16] = CUnsignedChar(self.major >> 8)
-        advertisementBytes[17] = CUnsignedChar(self.major & 255)
-        advertisementBytes[18] = CUnsignedChar(self.minor >> 8)
-        advertisementBytes[19] = CUnsignedChar(self.minor & 255)
-        advertisementBytes[20] = CUnsignedChar(self.measuredPower.asUnsigned())
+        advertisementBytes[16] = CUnsignedChar(major >> 8)
+        advertisementBytes[17] = CUnsignedChar(major & 255)
+        advertisementBytes[18] = CUnsignedChar(minor >> 8)
+        advertisementBytes[19] = CUnsignedChar(minor & 255)
+        advertisementBytes[20] = CUnsignedChar(NSNumber(char: measuredPower).unsignedCharValue)
 
-        let advertisementData = NSMutableData.dataWithBytes(advertisementBytes, length: 21) as NSData
+        let advertisementData = NSMutableData(bytes: advertisementBytes, length: 21) as NSData
         let beaconKey = "kCBAdvDataAppleBeaconKey";
 
         return [beaconKey : advertisementData]
